@@ -5,16 +5,16 @@
 
 ## Project Overview
 
-This project contains two Java programming assignments demonstrating concurrent programming and functional programming skills:
+This project consists of 2 programming assignments solved in Java — one covering multithreading concepts and another focused on functional programming with the Streams API.
 
 - **Assignment 1**: Producer-Consumer pattern with thread synchronization
 - **Assignment 2**: CSV data analysis using Streams API and functional programming
 
-Both assignments include comprehensive unit tests and demonstrate clean, modular code design.
+Both assignments include unit tests and follow clean, modular code design practices.
 
 ## Requirements
 
-- **Java 21** (JDK 21 or higher)
+- **Java 8+** (Project tested on JDK 21)
 - Maven 3.x
 - IntelliJ IDEA (recommended) or any Java IDE
 
@@ -29,7 +29,7 @@ build-challenge/
 ├── pom.xml                          # Maven configuration
 ├── README.md                        # This file
 ├── data/
-│   └── sales.csv                    # Sample sales data (25 records)
+│   └── sales.csv                    # Sales data (100 orders)
 ├── src/
 │   ├── main/java/io/github/sawanc/
 │   │   ├── Main.java                # Demo application entry point
@@ -46,10 +46,11 @@ build-challenge/
 │       ├── assignment1/
 │       │   └── ProducerConsumerTest.java  # 11 unit tests
 │       └── assignment2/
-│           └── SalesAnalysisServiceTest.java # 19 unit tests
+│           ├── SalesAnalysisServiceTest.java # 19 unit tests
+│           └── CSVReaderTest.java           # 11 unit tests
 ```
 
-**Total:** 30 unit tests with 100% pass rate
+**Total:** 41 unit tests, all passing successfully
 
 ## Quick Start
 
@@ -76,20 +77,21 @@ mvn test
 # Run specific test class
 mvn test -Dtest=ProducerConsumerTest
 mvn test -Dtest=SalesAnalysisServiceTest
+mvn test -Dtest=CSVReaderTest
 ```
 
 ## Assignments Overview
 
 ### Assignment 1: Producer-Consumer Pattern
 
-A classic implementation of the producer-consumer pattern demonstrating thread synchronization and concurrent programming.
+An implementation of the producer–consumer pattern demonstrating thread synchronization and concurrent programming.
 
 #### Features
 - **Thread-Safe Containers**: SourceContainer and DestinationContainer with synchronized methods
 - **Blocking Queue**: Uses `ArrayBlockingQueue` for thread-safe data transfer
 - **Multiple Producers/Consumers**: Supports concurrent producers and consumers
 - **Poison Pill Pattern**: Graceful shutdown using sentinel values
-- **Thread Synchronization**: Demonstrates wait/notify mechanisms through BlockingQueue
+- **Thread Synchronization**: Uses BlockingQueue for safe coordination between threads
 
 #### Components
 
@@ -131,6 +133,8 @@ mvn test -Dtest=ProducerConsumerTest#testSingleProducerSingleConsumer
 
 #### Sample Output
 
+![Assignment 1 Console Output](screenshots/assignment1-output.png)
+
 ```
 Assignment 1: Producer-Consumer Pattern Demo
 =============================================
@@ -147,11 +151,30 @@ Starting producer and consumer threads...
 [Consumer-36] Started consuming...
 [Producer-35] Started producing...
 [Consumer-37] Started consuming...
-[Consumer-37] Consumed: 10 (Total consumed: 1)
-[Producer-35] Produced: 10 (Queue size: 1)
-[Producer-34] Produced: 20 (Queue size: 1)
-[Consumer-36] Consumed: 20 (Total consumed: 1)
-...
+[Producer-34] Produced: 10
+[Consumer-36] Consumed: 10
+[Producer-35] Produced: 20
+[Consumer-37] Consumed: 20
+[Producer-34] Produced: 30
+[Consumer-36] Consumed: 30
+[Producer-35] Produced: 40
+[Consumer-37] Consumed: 40
+[Producer-34] Produced: 50
+[Consumer-36] Consumed: 50
+[Producer-35] Produced: 60
+[Consumer-37] Consumed: 60
+[Producer-34] Produced: 70
+[Consumer-36] Consumed: 70
+[Producer-35] Produced: 80
+[Consumer-37] Consumed: 80
+[Producer-34] Produced: 90
+[Consumer-36] Consumed: 90
+[Producer-35] Produced: 100
+[Consumer-37] Consumed: 100
+[Producer-34] Produced: 110
+[Consumer-36] Consumed: 110
+[Producer-35] Produced: 120
+[Consumer-37] Consumed: 120
 [Producer-34] Finished. Total items produced: 12
 [Producer-35] Finished. Total items produced: 8
 [Consumer-36] Received poison pill, stopping consumption
@@ -210,7 +233,7 @@ Items in destination (first 10): [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
 ### Assignment 2: Sales Data Analysis
 
-A functional programming-based sales data analysis application using Java 21 Streams API.
+A functional programming-based sales data analysis application using Java Streams API.
 
 #### Features
 - **CSV Data Reading**: Parse sales data from CSV files with error handling
@@ -223,17 +246,29 @@ A functional programming-based sales data analysis application using Java 21 Str
   - High-value transaction filtering
 
 #### Dataset Description
-The `data/sales.csv` file contains 25 sample sales records with the following structure:
-- **Product**: Product name (e.g., Laptop, Desk, Notebook)
-- **Category**: Product category (Electronics, Furniture, Stationery)
-- **Region**: Sales region (North, South, East, West)
-- **Amount**: Sale amount in USD
 
-**Dataset Assumptions**:
-- All amounts are in USD
-- Same products can appear multiple times (repeat purchases)
-- Regional distribution is balanced across North, South, East, and West
-- Categories represent common business segments
+The `data/sales.csv` file contains **100 sales order records** with the following structure:
+
+**CSV Columns** (7 fields):
+- **order_id**: Unique order identifier (ORD-001 to ORD-100)
+- **product**: Product name (e.g., Laptop, Desk, Phone, Sofa)
+- **category**: Product category (Electronics, Furniture, Stationery)
+- **region**: Sales region as continent names (North America, Europe, Asia, Africa, South America, Australia)
+- **amount**: Sale amount in USD (range: $4.99 - $1,299.99)
+- **quantity**: Number of units sold per order (range: 1-20 units)
+- **order_date**: Order date in YYYY-MM-DD format (January - April 2025)
+
+**Dataset Choices and Assumptions**:
+- **100 orders** provide sufficient data volume to demonstrate Stream operations effectively
+- **Continent-based regions** offer realistic geographical distribution for global sales analysis
+- **3 product categories** (Electronics, Furniture, Stationery) represent common business segments
+- All monetary amounts are in USD
+- Same products can appear in multiple orders (representing repeat purchases)
+- Dates are distributed across 4 months to show temporal patterns
+- Quantity field enables unit-based analysis in addition to revenue analysis
+- Dataset constructed to demonstrate functional programming competencies: grouping, aggregation, filtering, and lambda expressions
+
+OpenCSV is used as the CSV parsing library, which meets the requirement to use an appropriate API for handling CSV data.
 
 #### Running Assignment 2
 
@@ -247,13 +282,16 @@ mvn exec:java -Dexec.mainClass="io.github.sawanc.Main" -Dexec.args="assignment2"
 
 ```bash
 # Run all Assignment 2 tests
-mvn test -Dtest=SalesAnalysisServiceTest
+mvn test -Dtest=SalesAnalysisServiceTest,CSVReaderTest
 
 # Run specific test
 mvn test -Dtest=SalesAnalysisServiceTest#testGetTotalSales
+mvn test -Dtest=CSVReaderTest#testReadValidCSV
 ```
 
 #### Sample Output
+
+![Assignment 2 Console Output](screenshots/assignment2-output.png)
 
 Running the demo with `mvn exec:java -Dexec.mainClass="io.github.sawanc.Main" -Dexec.args="assignment2"`:
 
@@ -262,48 +300,84 @@ Assignment 2: CSV Data Analysis Demo
 =====================================
 
 Reading sales data from: data/sales.csv
-Successfully loaded 25 sales records.
+Successfully loaded 100 sales records.
 
 ============================================================
 SALES ANALYSIS SUMMARY
 ============================================================
 
-1. TOTAL SALES: $8196.35
+1. TOTAL SALES: $30602.62
 
 2. SALES BY CATEGORY:
-   Stationery     : $85.45
-   Furniture      : $2864.46
-   Electronics    : $5246.44
+   Furniture      : $14739.22
+   Electronics    : $15359.20
+   Stationery     : $504.20
 
 3. SALES BY REGION:
-   South          : $1925.96
-   North          : $2199.45
-   West           : $1158.98
-   East           : $2911.96
+   South America  : $5996.84
+   Europe         : $4536.34
+   Africa         : $6138.84
+   Australia      : $1875.37
+   North America  : $6502.37
+   Asia           : $5552.86
 
 4. AVERAGE SALES PER PRODUCT:
-   Laptop         : $1183.50
-   Calculator     : $29.99
-   Mouse          : $25.99
-   Keyboard       : $77.50
-   Pen Set        : $12.25
-   Monitor        : $612.50
-   Stapler        : $15.99
-   Notebook       : $5.99
-   Headphones     : $144.99
-   Bookshelf      : $212.25
-   Desk           : $475.00
-   Cabinet        : $387.50
-   Folder         : $8.99
+   Notebook       : $6.99
+   Desk           : $482.49
+   Nightstand     : $159.99
+   Sofa           : $949.99
+   Envelope       : $11.66
    Lamp           : $89.99
-   Chair          : $312.50
+   Scanner        : $189.99
+   Wardrobe       : $809.99
+   Cabinet        : $397.50
+   Dresser        : $623.32
+   Calculator     : $32.66
+   Keyboard       : $77.50
+   Printer        : $276.66
+   Tablet         : $549.99
+   Monitor        : $613.74
+   Paper          : $26.66
+   Headphones     : $162.49
+   Binder         : $21.66
+   Phone          : $849.99
+   Marker Set     : $17.99
+   Bookshelf      : $226.12
+   Folder         : $9.99
+   Tape           : $5.99
+   Webcam         : $103.32
+   Chair          : $323.74
+   Laptop         : $1190.09
+   Table          : $373.32
+   Mouse          : $27.99
+   Pen Set        : $13.37
+   Stapler        : $16.99
 
 5. HIGH-VALUE TRANSACTIONS (>= $500.00):
-   SalesRecord{product='Laptop', category='Electronics', region='North', amount=1200.50}
-   SalesRecord{product='Monitor', category='Electronics', region='East', amount=599.99}
-   SalesRecord{product='Laptop', category='Electronics', region='South', amount=1150.00}
-   SalesRecord{product='Monitor', category='Electronics', region='West', amount=625.00}
-   SalesRecord{product='Laptop', category='Electronics', region='East', amount=1199.99}
+   SalesRecord{orderId='ORD-001', product='Laptop', category='Electronics', region='North America', amount=1200.50, quantity=1, date='2025-01-05'}
+   SalesRecord{orderId='ORD-004', product='Monitor', category='Electronics', region='Africa', amount=599.99, quantity=1, date='2025-01-08'}
+   SalesRecord{orderId='ORD-016', product='Laptop', category='Electronics', region='Africa', amount=1150.00, quantity=1, date='2025-01-20'}
+   SalesRecord{orderId='ORD-019', product='Monitor', category='Electronics', region='North America', amount=625.00, quantity=1, date='2025-01-23'}
+   SalesRecord{orderId='ORD-023', product='Laptop', category='Electronics', region='South America', amount=1199.99, quantity=1, date='2025-01-27'}
+   SalesRecord{orderId='ORD-026', product='Tablet', category='Electronics', region='Europe', amount=549.99, quantity=1, date='2025-02-01'}
+   SalesRecord{orderId='ORD-027', product='Phone', category='Electronics', region='Asia', amount=899.99, quantity=1, date='2025-02-02'}
+   SalesRecord{orderId='ORD-031', product='Sofa', category='Furniture', region='North America', amount=899.99, quantity=1, date='2025-02-06'}
+   SalesRecord{orderId='ORD-033', product='Dresser', category='Furniture', region='Asia', amount=599.99, quantity=1, date='2025-02-08'}
+   SalesRecord{orderId='ORD-034', product='Wardrobe', category='Furniture', region='Africa', amount=799.99, quantity=1, date='2025-02-09'}
+   SalesRecord{orderId='ORD-041', product='Laptop', category='Electronics', region='South America', amount=1299.99, quantity=1, date='2025-02-16'}
+   SalesRecord{orderId='ORD-044', product='Monitor', category='Electronics', region='Europe', amount=649.99, quantity=1, date='2025-02-19'}
+   SalesRecord{orderId='ORD-056', product='Tablet', category='Electronics', region='Europe', amount=549.99, quantity=1, date='2025-03-03'}
+   SalesRecord{orderId='ORD-057', product='Phone', category='Electronics', region='Asia', amount=799.99, quantity=1, date='2025-03-04'}
+   SalesRecord{orderId='ORD-061', product='Sofa', category='Furniture', region='North America', amount=999.99, quantity=1, date='2025-03-08'}
+   SalesRecord{orderId='ORD-063', product='Dresser', category='Furniture', region='Asia', amount=649.99, quantity=1, date='2025-03-10'}
+   SalesRecord{orderId='ORD-064', product='Wardrobe', category='Furniture', region='Africa', amount=849.99, quantity=1, date='2025-03-11'}
+   SalesRecord{orderId='ORD-071', product='Laptop', category='Electronics', region='South America', amount=1099.99, quantity=1, date='2025-03-18'}
+   SalesRecord{orderId='ORD-074', product='Monitor', category='Electronics', region='Europe', amount=579.99, quantity=1, date='2025-03-21'}
+   SalesRecord{orderId='ORD-086', product='Tablet', category='Electronics', region='Europe', amount=599.99, quantity=1, date='2025-04-02'}
+   SalesRecord{orderId='ORD-087', product='Phone', category='Electronics', region='Asia', amount=849.99, quantity=1, date='2025-04-03'}
+   SalesRecord{orderId='ORD-091', product='Sofa', category='Furniture', region='North America', amount=949.99, quantity=1, date='2025-04-07'}
+   SalesRecord{orderId='ORD-093', product='Dresser', category='Furniture', region='Asia', amount=619.99, quantity=1, date='2025-04-09'}
+   SalesRecord{orderId='ORD-094', product='Wardrobe', category='Furniture', region='Africa', amount=779.99, quantity=1, date='2025-04-10'}
 
 ============================================================
 ```
@@ -319,7 +393,7 @@ SALES ANALYSIS SUMMARY
 
 **Code Quality**:
 - Comprehensive Javadoc documentation
-- 19 unit tests covering all methods and edge cases
+- 30 unit tests covering all methods and edge cases (19 for SalesAnalysisService, 11 for CSVReader)
 - Error handling for file I/O and CSV parsing
 - Clean separation of concerns (POJO, Reader, Service)
 
@@ -333,7 +407,7 @@ mvn test
 
 **Output:**
 ```
-Tests run: 30, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 

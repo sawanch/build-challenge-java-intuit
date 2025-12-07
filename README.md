@@ -133,7 +133,7 @@ mvn test -Dtest=ProducerConsumerTest#testSingleProducerSingleConsumer
 
 #### Sample Output
 
-![Assignment 1 Console Output](screenshots/assignment1-output.png)
+![Assignment 1 Console Output](screenshots/assignment1-output.png?raw=true)
 
 ```
 Assignment 1: Producer-Consumer Pattern Demo

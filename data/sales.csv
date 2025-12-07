@@ -1,26 +1,101 @@
-product,category,region,amount
-Laptop,Electronics,North,1200.50
-Mouse,Electronics,North,25.99
-Keyboard,Electronics,South,75.00
-Monitor,Electronics,East,599.99
-Headphones,Electronics,West,149.99
-Desk,Furniture,North,450.00
-Chair,Furniture,South,299.99
-Bookshelf,Furniture,East,199.50
-Cabinet,Furniture,West,375.00
-Lamp,Furniture,North,89.99
-Notebook,Stationery,South,5.99
-Pen Set,Stationery,East,12.50
-Folder,Stationery,West,8.99
-Stapler,Stationery,North,15.99
-Calculator,Stationery,South,29.99
-Laptop,Electronics,South,1150.00
-Desk,Furniture,East,499.99
-Chair,Furniture,North,325.00
-Monitor,Electronics,West,625.00
-Keyboard,Electronics,North,79.99
-Bookshelf,Furniture,South,225.00
-Pen Set,Stationery,North,11.99
-Laptop,Electronics,East,1199.99
-Headphones,Electronics,South,139.99
-Cabinet,Furniture,East,399.99
+order_id,product,category,region,amount,quantity,order_date
+ORD-001,Laptop,Electronics,North America,1200.50,1,2025-01-05
+ORD-002,Mouse,Electronics,Europe,25.99,2,2025-01-06
+ORD-003,Keyboard,Electronics,Asia,75.00,1,2025-01-07
+ORD-004,Monitor,Electronics,Africa,599.99,1,2025-01-08
+ORD-005,Headphones,Electronics,South America,149.99,1,2025-01-09
+ORD-006,Desk,Furniture,Australia,450.00,1,2025-01-10
+ORD-007,Chair,Furniture,North America,299.99,1,2025-01-11
+ORD-008,Bookshelf,Furniture,Europe,199.50,2,2025-01-12
+ORD-009,Cabinet,Furniture,Asia,375.00,1,2025-01-13
+ORD-010,Lamp,Furniture,Africa,89.99,3,2025-01-14
+ORD-011,Notebook,Stationery,South America,5.99,5,2025-01-15
+ORD-012,Pen Set,Stationery,Australia,12.50,4,2025-01-16
+ORD-013,Folder,Stationery,North America,8.99,10,2025-01-17
+ORD-014,Stapler,Stationery,Europe,15.99,2,2025-01-18
+ORD-015,Calculator,Stationery,Asia,29.99,1,2025-01-19
+ORD-016,Laptop,Electronics,Africa,1150.00,1,2025-01-20
+ORD-017,Desk,Furniture,South America,499.99,1,2025-01-21
+ORD-018,Chair,Furniture,Australia,325.00,2,2025-01-22
+ORD-019,Monitor,Electronics,North America,625.00,1,2025-01-23
+ORD-020,Keyboard,Electronics,Europe,79.99,3,2025-01-24
+ORD-021,Bookshelf,Furniture,Asia,225.00,1,2025-01-25
+ORD-022,Pen Set,Stationery,Africa,11.99,6,2025-01-26
+ORD-023,Laptop,Electronics,South America,1199.99,1,2025-01-27
+ORD-024,Headphones,Electronics,Australia,139.99,2,2025-01-28
+ORD-025,Cabinet,Furniture,North America,399.99,1,2025-01-29
+ORD-026,Tablet,Electronics,Europe,499.99,1,2025-02-01
+ORD-027,Phone,Electronics,Asia,899.99,1,2025-02-02
+ORD-028,Printer,Electronics,Africa,249.99,1,2025-02-03
+ORD-029,Scanner,Electronics,South America,179.99,1,2025-02-04
+ORD-030,Webcam,Electronics,Australia,89.99,2,2025-02-05
+ORD-031,Sofa,Furniture,North America,899.99,1,2025-02-06
+ORD-032,Table,Furniture,Europe,349.99,1,2025-02-07
+ORD-033,Dresser,Furniture,Asia,599.99,1,2025-02-08
+ORD-034,Wardrobe,Furniture,Africa,799.99,1,2025-02-09
+ORD-035,Nightstand,Furniture,South America,149.99,2,2025-02-10
+ORD-036,Binder,Stationery,Australia,19.99,8,2025-02-11
+ORD-037,Paper,Stationery,North America,24.99,5,2025-02-12
+ORD-038,Envelope,Stationery,Europe,9.99,20,2025-02-13
+ORD-039,Marker Set,Stationery,Asia,15.99,4,2025-02-14
+ORD-040,Tape,Stationery,Africa,4.99,10,2025-02-15
+ORD-041,Laptop,Electronics,South America,1299.99,1,2025-02-16
+ORD-042,Mouse,Electronics,Australia,29.99,3,2025-02-17
+ORD-043,Keyboard,Electronics,North America,85.00,2,2025-02-18
+ORD-044,Monitor,Electronics,Europe,649.99,1,2025-02-19
+ORD-045,Headphones,Electronics,Asia,199.99,1,2025-02-20
+ORD-046,Desk,Furniture,Africa,499.99,1,2025-02-21
+ORD-047,Chair,Furniture,South America,349.99,1,2025-02-22
+ORD-048,Bookshelf,Furniture,Australia,249.99,1,2025-02-23
+ORD-049,Cabinet,Furniture,North America,425.00,1,2025-02-24
+ORD-050,Lamp,Furniture,Europe,99.99,2,2025-02-25
+ORD-051,Notebook,Stationery,Asia,6.99,8,2025-02-26
+ORD-052,Pen Set,Stationery,Africa,14.99,5,2025-02-27
+ORD-053,Folder,Stationery,South America,9.99,12,2025-02-28
+ORD-054,Stapler,Stationery,Australia,17.99,3,2025-03-01
+ORD-055,Calculator,Stationery,North America,34.99,1,2025-03-02
+ORD-056,Tablet,Electronics,Europe,549.99,1,2025-03-03
+ORD-057,Phone,Electronics,Asia,799.99,1,2025-03-04
+ORD-058,Printer,Electronics,Africa,299.99,1,2025-03-05
+ORD-059,Scanner,Electronics,South America,199.99,1,2025-03-06
+ORD-060,Webcam,Electronics,Australia,119.99,2,2025-03-07
+ORD-061,Sofa,Furniture,North America,999.99,1,2025-03-08
+ORD-062,Table,Furniture,Europe,399.99,1,2025-03-09
+ORD-063,Dresser,Furniture,Asia,649.99,1,2025-03-10
+ORD-064,Wardrobe,Furniture,Africa,849.99,1,2025-03-11
+ORD-065,Nightstand,Furniture,South America,169.99,2,2025-03-12
+ORD-066,Binder,Stationery,Australia,22.99,6,2025-03-13
+ORD-067,Paper,Stationery,North America,27.99,4,2025-03-14
+ORD-068,Envelope,Stationery,Europe,11.99,15,2025-03-15
+ORD-069,Marker Set,Stationery,Asia,18.99,3,2025-03-16
+ORD-070,Tape,Stationery,Africa,5.99,8,2025-03-17
+ORD-071,Laptop,Electronics,South America,1099.99,1,2025-03-18
+ORD-072,Mouse,Electronics,Australia,27.99,4,2025-03-19
+ORD-073,Keyboard,Electronics,North America,69.99,2,2025-03-20
+ORD-074,Monitor,Electronics,Europe,579.99,1,2025-03-21
+ORD-075,Headphones,Electronics,Asia,159.99,1,2025-03-22
+ORD-076,Desk,Furniture,Africa,479.99,1,2025-03-23
+ORD-077,Chair,Furniture,South America,319.99,1,2025-03-24
+ORD-078,Bookshelf,Furniture,Australia,229.99,1,2025-03-25
+ORD-079,Cabinet,Furniture,North America,389.99,1,2025-03-26
+ORD-080,Lamp,Furniture,Europe,79.99,3,2025-03-27
+ORD-081,Notebook,Stationery,Asia,7.99,10,2025-03-28
+ORD-082,Pen Set,Stationery,Africa,13.99,7,2025-03-29
+ORD-083,Folder,Stationery,South America,10.99,9,2025-03-30
+ORD-084,Stapler,Stationery,Australia,16.99,4,2025-03-31
+ORD-085,Calculator,Stationery,North America,32.99,2,2025-04-01
+ORD-086,Tablet,Electronics,Europe,599.99,1,2025-04-02
+ORD-087,Phone,Electronics,Asia,849.99,1,2025-04-03
+ORD-088,Printer,Electronics,Africa,279.99,1,2025-04-04
+ORD-089,Scanner,Electronics,South America,189.99,1,2025-04-05
+ORD-090,Webcam,Electronics,Australia,99.99,3,2025-04-06
+ORD-091,Sofa,Furniture,North America,949.99,1,2025-04-07
+ORD-092,Table,Furniture,Europe,369.99,1,2025-04-08
+ORD-093,Dresser,Furniture,Asia,619.99,1,2025-04-09
+ORD-094,Wardrobe,Furniture,Africa,779.99,1,2025-04-10
+ORD-095,Nightstand,Furniture,South America,159.99,3,2025-04-11
+ORD-096,Binder,Stationery,Australia,21.99,9,2025-04-12
+ORD-097,Paper,Stationery,North America,26.99,6,2025-04-13
+ORD-098,Envelope,Stationery,Europe,12.99,18,2025-04-14
+ORD-099,Marker Set,Stationery,Asia,17.99,5,2025-04-15
+ORD-100,Tape,Stationery,Africa,6.99,12,2025-04-16

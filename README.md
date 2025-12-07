@@ -147,48 +147,59 @@ Configuration:
 
 Starting producer and consumer threads...
 
-[Producer-34] Started producing...
-[Consumer-36] Started consuming...
+[Producer-36] Started producing...
 [Producer-35] Started producing...
+[Consumer-38] Started consuming...
 [Consumer-37] Started consuming...
-[Producer-34] Produced: 10
-[Consumer-36] Consumed: 10
-[Producer-35] Produced: 20
-[Consumer-37] Consumed: 20
-[Producer-34] Produced: 30
-[Consumer-36] Consumed: 30
-[Producer-35] Produced: 40
-[Consumer-37] Consumed: 40
-[Producer-34] Produced: 50
-[Consumer-36] Consumed: 50
-[Producer-35] Produced: 60
-[Consumer-37] Consumed: 60
-[Producer-34] Produced: 70
-[Consumer-36] Consumed: 70
-[Producer-35] Produced: 80
-[Consumer-37] Consumed: 80
-[Producer-34] Produced: 90
-[Consumer-36] Consumed: 90
-[Producer-35] Produced: 100
-[Consumer-37] Consumed: 100
-[Producer-34] Produced: 110
-[Consumer-36] Consumed: 110
-[Producer-35] Produced: 120
-[Consumer-37] Consumed: 120
-[Producer-34] Finished. Total items produced: 12
-[Producer-35] Finished. Total items produced: 8
-[Consumer-36] Received poison pill, stopping consumption
+
+[Producer-36] Produced: 10 (Queue size: 1)
+[Consumer-38] Consumed: 10 (Total consumed: 1)
+[Producer-35] Produced: 20 (Queue size: 1)
+[Consumer-37] Consumed: 20 (Total consumed: 1)
+
+[Producer-36] Produced: 30 (Queue size: 1)
+[Consumer-38] Consumed: 30 (Total consumed: 2)
+[Producer-35] Produced: 40 (Queue size: 1)
+[Consumer-37] Consumed: 40 (Total consumed: 2)
+
+[Producer-36] Produced: 50 (Queue size: 1)
+[Consumer-38] Consumed: 50 (Total consumed: 3)
+[Producer-35] Produced: 60 (Queue size: 1)
+[Consumer-37] Consumed: 60 (Total consumed: 3)
+
+[Producer-36] Produced: 70 (Queue size: 1)
+[Consumer-38] Consumed: 70 (Total consumed: 4)
+[Producer-35] Produced: 80 (Queue size: 1)
+[Consumer-37] Consumed: 80 (Total consumed: 4)
+
+[Producer-36] Produced: 90 (Queue size: 1)
+[Consumer-38] Consumed: 90 (Total consumed: 5)
+[Producer-35] Produced: 100 (Queue size: 1)
+[Consumer-37] Consumed: 100 (Total consumed: 5)
+
+[Producer-36] Produced: 110 (Queue size: 1)
+[Consumer-38] Consumed: 110 (Total consumed: 6)
+[Producer-35] Produced: 120 (Queue size: 1)
+[Consumer-37] Consumed: 120 (Total consumed: 6)
+
+[Consumer-38] Received poison pill, stopping consumption
+[Consumer-38] Finished. Total items consumed: 12
+
 [Consumer-37] Received poison pill, stopping consumption
-[Consumer-36] Finished. Total items consumed: 12
-[Consumer-37] Finished. Total items consumed: 8
+[Consumer-37] Finished. Total items consumed: 12
+
+[Producer-36] Finished. Total items produced: 12
+[Producer-35] Finished. Total items produced: 8
 
 ============================================================
 RESULTS
 ============================================================
+
 Producer 1 produced: 12 items
 Producer 2 produced: 8 items
+
 Consumer 1 consumed: 12 items
-Consumer 2 consumed: 8 items
+Consumer 2 consumed: 12 items
 
 Total produced: 20
 Total consumed: 20

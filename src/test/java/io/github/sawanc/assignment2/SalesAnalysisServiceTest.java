@@ -32,14 +32,14 @@ public class SalesAnalysisServiceTest {
      */
     private List<SalesRecord> createTestRecords() {
         List<SalesRecord> records = new ArrayList<>();
-        records.add(new SalesRecord("Laptop", "Electronics", "North", 1200.0));
-        records.add(new SalesRecord("Mouse", "Electronics", "North", 25.0));
-        records.add(new SalesRecord("Laptop", "Electronics", "South", 1100.0));
-        records.add(new SalesRecord("Desk", "Furniture", "North", 450.0));
-        records.add(new SalesRecord("Chair", "Furniture", "South", 300.0));
-        records.add(new SalesRecord("Monitor", "Electronics", "East", 600.0));
-        records.add(new SalesRecord("Keyboard", "Electronics", "West", 75.0));
-        records.add(new SalesRecord("Desk", "Furniture", "East", 500.0));
+        records.add(new SalesRecord("ORD-001", "Laptop", "Electronics", "North America", 1200.0, 1, "2025-01-15"));
+        records.add(new SalesRecord("ORD-002", "Mouse", "Electronics", "Europe", 25.0, 2, "2025-01-16"));
+        records.add(new SalesRecord("ORD-003", "Laptop", "Electronics", "Asia", 1100.0, 1, "2025-01-17"));
+        records.add(new SalesRecord("ORD-004", "Desk", "Furniture", "Africa", 450.0, 1, "2025-01-18"));
+        records.add(new SalesRecord("ORD-005", "Chair", "Furniture", "South America", 300.0, 1, "2025-01-19"));
+        records.add(new SalesRecord("ORD-006", "Monitor", "Electronics", "Australia", 600.0, 1, "2025-01-20"));
+        records.add(new SalesRecord("ORD-007", "Keyboard", "Electronics", "North America", 75.0, 3, "2025-01-21"));
+        records.add(new SalesRecord("ORD-008", "Desk", "Furniture", "Europe", 500.0, 1, "2025-01-22"));
         return records;
     }
 
@@ -72,9 +72,9 @@ public class SalesAnalysisServiceTest {
     @Test
     public void testGetTotalSalesWithZeroValues() {
         List<SalesRecord> recordsWithZero = new ArrayList<>();
-        recordsWithZero.add(new SalesRecord("Product1", "Category1", "Region1", 0.0));
-        recordsWithZero.add(new SalesRecord("Product2", "Category2", "Region2", 100.0));
-        recordsWithZero.add(new SalesRecord("Product3", "Category3", "Region3", 0.0));
+        recordsWithZero.add(new SalesRecord("ORD-101", "Product1", "Category1", "North America", 0.0, 1, "2025-01-01"));
+        recordsWithZero.add(new SalesRecord("ORD-102", "Product2", "Category2", "Europe", 100.0, 1, "2025-01-02"));
+        recordsWithZero.add(new SalesRecord("ORD-103", "Product3", "Category3", "Asia", 0.0, 1, "2025-01-03"));
 
         double total = service.getTotalSales(recordsWithZero);
         assertEquals(100.0, total, 0.01, "Total sales with zero values should be 100.0");
@@ -87,7 +87,7 @@ public class SalesAnalysisServiceTest {
     @Test
     public void testGetTotalSalesSingleRecord() {
         List<SalesRecord> singleRecord = new ArrayList<>();
-        singleRecord.add(new SalesRecord("Product", "Category", "Region", 250.0));
+        singleRecord.add(new SalesRecord("ORD-999", "Product", "Category", "North America", 250.0, 1, "2025-01-01"));
 
         double total = service.getTotalSales(singleRecord);
         assertEquals(250.0, total, 0.01, "Total sales for single record should be 250.0");
@@ -133,7 +133,7 @@ public class SalesAnalysisServiceTest {
     @Test
     public void testGetSalesByCategorySingleRecord() {
         List<SalesRecord> singleRecord = new ArrayList<>();
-        singleRecord.add(new SalesRecord("Product", "Category1", "Region", 100.0));
+        singleRecord.add(new SalesRecord("ORD-111", "Product", "Category1", "Europe", 100.0, 1, "2025-01-01"));
 
         Map<String, Double> salesByCategory = service.getSalesByCategory(singleRecord);
         assertEquals(1, salesByCategory.size(), "Should have 1 category");
@@ -150,23 +150,31 @@ public class SalesAnalysisServiceTest {
         Map<String, Double> salesByRegion = service.getSalesByRegion(testRecords);
 
         assertNotNull(salesByRegion, "Sales by region map should not be null");
-        assertEquals(4, salesByRegion.size(), "Should have 4 regions");
+        assertEquals(6, salesByRegion.size(), "Should have 6 regions");
 
-        // North: 1200 + 25 + 450 = 1675.0
-        assertEquals(1675.0, salesByRegion.get("North"), 0.01,
-                "North region total should be 1675.0");
+        // North America: 1200 + 75 = 1275.0
+        assertEquals(1275.0, salesByRegion.get("North America"), 0.01,
+                "North America region total should be 1275.0");
 
-        // South: 1100 + 300 = 1400.0
-        assertEquals(1400.0, salesByRegion.get("South"), 0.01,
-                "South region total should be 1400.0");
+        // Europe: 25 + 500 = 525.0
+        assertEquals(525.0, salesByRegion.get("Europe"), 0.01,
+                "Europe region total should be 525.0");
 
-        // East: 600 + 500 = 1100.0
-        assertEquals(1100.0, salesByRegion.get("East"), 0.01,
-                "East region total should be 1100.0");
+        // Asia: 1100.0
+        assertEquals(1100.0, salesByRegion.get("Asia"), 0.01,
+                "Asia region total should be 1100.0");
 
-        // West: 75.0
-        assertEquals(75.0, salesByRegion.get("West"), 0.01,
-                "West region total should be 75.0");
+        // Africa: 450.0
+        assertEquals(450.0, salesByRegion.get("Africa"), 0.01,
+                "Africa region total should be 450.0");
+
+        // South America: 300.0
+        assertEquals(300.0, salesByRegion.get("South America"), 0.01,
+                "South America region total should be 300.0");
+
+        // Australia: 600.0
+        assertEquals(600.0, salesByRegion.get("Australia"), 0.01,
+                "Australia region total should be 600.0");
     }
 
     /**
@@ -189,12 +197,12 @@ public class SalesAnalysisServiceTest {
     @Test
     public void testGetSalesByRegionWithZeroValues() {
         List<SalesRecord> recordsWithZero = new ArrayList<>();
-        recordsWithZero.add(new SalesRecord("Product1", "Category1", "Region1", 0.0));
-        recordsWithZero.add(new SalesRecord("Product2", "Category2", "Region1", 200.0));
+        recordsWithZero.add(new SalesRecord("ORD-201", "Product1", "Category1", "Asia", 0.0, 1, "2025-01-01"));
+        recordsWithZero.add(new SalesRecord("ORD-202", "Product2", "Category2", "Asia", 200.0, 1, "2025-01-02"));
 
         Map<String, Double> salesByRegion = service.getSalesByRegion(recordsWithZero);
-        assertEquals(200.0, salesByRegion.get("Region1"), 0.01,
-                "Region1 total with zero values should be 200.0");
+        assertEquals(200.0, salesByRegion.get("Asia"), 0.01,
+                "Asia total with zero values should be 200.0");
     }
 
     /**
@@ -253,7 +261,7 @@ public class SalesAnalysisServiceTest {
     @Test
     public void testGetAverageSalesPerProductSingleRecord() {
         List<SalesRecord> singleRecord = new ArrayList<>();
-        singleRecord.add(new SalesRecord("Product", "Category", "Region", 150.0));
+        singleRecord.add(new SalesRecord("ORD-301", "Product", "Category", "Africa", 150.0, 1, "2025-01-01"));
 
         Map<String, Double> avgSalesPerProduct = service.getAverageSalesPerProduct(singleRecord);
         assertEquals(1, avgSalesPerProduct.size(), "Should have 1 product");
@@ -335,8 +343,8 @@ public class SalesAnalysisServiceTest {
     @Test
     public void testFilterHighValueTransactionsZeroThreshold() {
         List<SalesRecord> recordsWithZero = new ArrayList<>();
-        recordsWithZero.add(new SalesRecord("Product1", "Category1", "Region1", 0.0));
-        recordsWithZero.add(new SalesRecord("Product2", "Category2", "Region2", 100.0));
+        recordsWithZero.add(new SalesRecord("ORD-401", "Product1", "Category1", "South America", 0.0, 1, "2025-01-01"));
+        recordsWithZero.add(new SalesRecord("ORD-402", "Product2", "Category2", "Australia", 100.0, 1, "2025-01-02"));
 
         List<SalesRecord> highValue = service.filterHighValueTransactions(recordsWithZero, 0.0);
         assertEquals(2, highValue.size(), "Should include all records with zero threshold");

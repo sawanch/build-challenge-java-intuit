@@ -19,7 +19,8 @@ public class CSVReader {
 
     /**
      * Reads sales records from a CSV file.
-     * Expected CSV format: header row followed by data rows with columns: product, category, region, amount.
+     * Expected CSV format: header row followed by data rows with columns: 
+     * order_id, product, category, region, amount, quantity, order_date.
      *
      * @param filePath the path to the CSV file
      * @return a list of SalesRecord objects parsed from the file
@@ -77,19 +78,23 @@ public class CSVReader {
      * @throws IllegalArgumentException if the row format is invalid
      */
     private static SalesRecord parseRow(String[] row) {
-        if (row.length != 4) {
+        if (row.length != 7) {
             throw new IllegalArgumentException(
-                    "Expected 4 columns (product, category, region, amount), but found " + row.length);
+                    "Expected 7 columns (order_id, product, category, region, amount, quantity, order_date), but found " + row.length);
         }
 
         // Trim whitespace from all fields
-        String product = row[0].trim();
-        String category = row[1].trim();
-        String region = row[2].trim();
-        String amountStr = row[3].trim();
+        String orderId = row[0].trim();
+        String product = row[1].trim();
+        String category = row[2].trim();
+        String region = row[3].trim();
+        String amountStr = row[4].trim();
+        String quantityStr = row[5].trim();
+        String orderDate = row[6].trim();
 
         // Validate non-empty fields
-        if (product.isEmpty() || category.isEmpty() || region.isEmpty() || amountStr.isEmpty()) {
+        if (orderId.isEmpty() || product.isEmpty() || category.isEmpty() || region.isEmpty() || 
+            amountStr.isEmpty() || quantityStr.isEmpty() || orderDate.isEmpty()) {
             throw new IllegalArgumentException("CSV row contains empty fields");
         }
 
@@ -101,6 +106,14 @@ public class CSVReader {
             throw new IllegalArgumentException("Invalid amount value: " + amountStr, e);
         }
 
-        return new SalesRecord(product, category, region, amount);
+        // Parse quantity to int
+        int quantity;
+        try {
+            quantity = Integer.parseInt(quantityStr);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid quantity value: " + quantityStr, e);
+        }
+
+        return new SalesRecord(orderId, product, category, region, amount, quantity, orderDate);
     }
 }
